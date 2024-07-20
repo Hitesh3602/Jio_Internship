@@ -1,0 +1,102 @@
+Microsoft Windows [Version 10.0.22621.3737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Hitesh's Laptop>docker pull postgres
+Using default tag: latest
+latest: Pulling from library/postgres
+2cc3ae149d28: Pull complete
+d1a63825d58e: Pull complete
+ed6f372fe58d: Pull complete
+35f975e69306: Pull complete
+40c4fe86e99d: Pull complete
+4795e1a32ff6: Pull complete
+bcb5a54ae87d: Pull complete
+d3983228bec6: Pull complete
+5378bf7229e9: Pull complete
+bba3241011a6: Pull complete
+5e1d0413d05a: Pull complete
+6a489170d05e: Pull complete
+440b39aff272: Pull complete
+582c79113570: Pull complete
+Digest: sha256:46aa2ee5d664b275f05d1a963b30fff60fb422b4b594d509765c42db46d48881
+Status: Downloaded newer image for postgres:latest
+docker.io/library/postgres:latest
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview postgres
+
+C:\Users\Hitesh's Laptop>docker run --name my_postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+79fb888128b731ba2b2235af41cb71f4cd4c859388ac7a14f5642ea26400954e
+
+C:\Users\Hitesh's Laptop>docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS      NAMES
+79fb888128b7   postgres   "docker-entrypoint.s…"   7 seconds ago   Up 6 seconds   5432/tcp   my_postgres
+
+C:\Users\Hitesh's Laptop>docker exec -it my_postgres psql -U postgres
+psql (16.3 (Debian 16.3-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# help
+You are using psql, the command-line interface to PostgreSQL.
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+postgres=# docker run --name my_postgres -e POSTGRES_PASSWORD=mysecretpassword -v pgdata:/var/lib/postgresql/data -d postgres
+postgres-# q
+postgres-# \q
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug my_postgres
+    Learn more at https://docs.docker.com/go/debug-cli/
+
+
+C:\Users\Hitesh's Laptop>docker exec -it my_postgres psql -U postgres
+psql (16.3 (Debian 16.3-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# CREATE DATABASE testdb;
+CREATE DATABASE
+postgres=# \c testdb
+You are now connected to database "testdb" as user "postgres".
+testdb=# CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    age INT
+);
+CREATE TABLE
+testdb=# INSERT INTO users (name, age) VALUES ('Alice', 30);
+INSERT INTO users (name, age) VALUES ('Bob', 25);
+INSERT INTO users (name, age) VALUES ('Charlie', 35);
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+testdb=# SELECT * FROM users;
+ id |  name   | age
+----+---------+-----
+  1 | Alice   |  30
+  2 | Bob     |  25
+  3 | Charlie |  35
+(3 rows)
+
+testdb=# UPDATE users SET age = 31 WHERE name = 'Alice';
+UPDATE 1
+testdb=# SELECT * FROM users;
+ id |  name   | age
+----+---------+-----
+  2 | Bob     |  25
+  3 | Charlie |  35
+  1 | Alice   |  31
+(3 rows)
+
+testdb=# DELETE FROM users WHERE name = 'Bob';
+DELETE 1
+testdb=# SELECT * FROM users;
+ id |  name   | age
+----+---------+-----
+  3 | Charlie |  35
+  1 | Alice   |  31
+(2 rows)
+
+testdb=#;

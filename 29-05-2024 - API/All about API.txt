@@ -1,0 +1,34 @@
+API ( Application Program Interface ) :- using or getting access to someone data.
+
+Example :- 
+		plane booking -> Indigo
+		www.indigo.com/bookplane/API_KEY
+		Indigo verifies and checks
+
+~ To establish secured communication between both the parties
+~ Both of them have there own API KEY ( don't share there api key to all )
+~ Customer -> {API} Waiter {API} -> Chef
+
+*********************************************************************************
+
+Types of API :-
+
+~ PUBLIC API :- Open source, anyone can use them, can be access easily.
+
+~ PARTHER API :- Only available for specific authorized user/partners.
+
+~ INTERNAL API :- Company having some own API for there use only.
+
+~ COMPOSITE API :- Generally a combination of 2 or more API
+
+*********************************************************************************
+
+API protocols and architectures
+
+~ Every API needs proper commands and architectures.
+~ There are three types :- 
+				~ REST
+				~ RCP
+				~ SOAP
+
+*********************************************************************************

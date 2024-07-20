@@ -1,0 +1,22 @@
+services:
+  postgresDB_docker:
+    image: postgres
+    networks:
+      - db-adminer-network
+    restart: always
+    environment:
+      POSTGRES_DB: rmsLocal
+      POSTGRES_USER: rmsLocal
+      POSTGRES_PASSWORD: rmsLocal
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_docker_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_docker_data:
+
+networks:
+  db-adminer-network:
+    external: true
+# http://localhost:4444/?pgsql=postgresdb-postgresDB_docker-1&username=rmsLocal&db=rmsLocal&ns=public

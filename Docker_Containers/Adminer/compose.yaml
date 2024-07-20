@@ -1,0 +1,12 @@
+services:
+  adminer_docker:
+    image: adminer:latest
+    networks:
+      - db-adminer-network
+    restart: always
+    ports:
+      - 4444:8080
+
+networks:
+  db-adminer-network:
+    external: true
